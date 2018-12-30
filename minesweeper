@@ -1,0 +1,166 @@
+#include<stdio.h>  
+#include<stdlib.h> 
+
+void kalosorisma();
+void rand_mines(char msweep[21][21]);
+void printmatrix(char msweep[21][21],int r,char user_chart[21][21]);
+int process(char msweep[21][21],int r,int c,char user_chart[21][21]);
+
+int main()
+
+{                  
+
+char msweep[21][21] = {{'0'}};      
+int i,r,c;   
+char user_chart[21][21] = {{'0'}};
+
+kalosorisma();   
+    
+ rand_mines(msweep);  
+
+  
+  printf("grapse tis sintetagmenes sou (1-20)\n");
+  scanf("%d%d",&r,&c);
+ 
+              printmatrix(msweep,12,user_chart);  
+ 
+ i = process(msweep,r,c,user_chart); 
+  
+     
+  while(i == 1)     
+   {
+     printf("ta pas kala\n");      
+     printf(" se periklioun %c ,narkes \n\n",msweep[r][c]);
+     
+     printmatrix(msweep,12,user_chart); 
+     
+     printf("vale tis epomenes sintetagmenes soy ");
+     scanf("%d%d",&r,&c);
+     i=0; 
+     
+     i = process(msweep,r,c,user_chart);    
+   
+   
+   }  
+
+  if(i==0)
+   printf("exases epeses se narki \n");
+
+return 0;    
+    
+}
+
+void kalosorisma()
+{
+
+char apantish;
+
+ printf("Kalos irthes ston narkalefti\n");
+
+ printf("pata\n");
+ printf("0 kai to enter gia perisoteres plhrofories\n");
+ printf("alliws opoiodhpote allo plhktro gia na ksekinhsei to paixnidi \n");
+ scanf("%c",&apantish);
+
+ if(apantish == '0')
+  {
+   printf("Eisai sthn mesh enos narkopediou "); printf("\n");    
+  printf("Mporeis na periplanitheis eisagontas tis suntetagmenes sou X kai Y se xwro 20x20\n");   
+   printf("o opoios periexei 40 vomves\n");
+   printf("kalh epitixia \n\n");
+  
+  }
+else
+ return;    
+}
+
+void rand_mines(char msweep[21][21])
+
+{
+    
+int r,c,m;
+
+   
+ 
+ for(m=0;m<50;m++)
+     
+  {
+   r = rand() % 21; 
+                    
+   c = rand() % 21; 
+    
+   
+   msweep[r][c] = '9'; 
+  printf("%d %d \n",r,c);
+  
+  }  
+    
+return;
+
+}
+
+void printmatrix(char msweep[][21],int r,char user_chart[21][21])
+{
+    
+int i,j;    
+ 
+printf("   .-.-.-.-.-.-.-.-.-.-.-.\n");
+
+ for(i=1;i<r;i++)
+  {
+   printf("./.");
+
+   for(j=1;j<21;j++)  
+    {
+     printf("%c ",user_chart[i][j]);    
+    } 
+   
+   printf(".\\.");
+   
+   printf("\n");   
+  
+  }
+
+printf(".-.-.-.-.-.-.-.-.-.-.-.-.\n\n");
+
+return;    
+}
+
+void process(char msweep[21][21],int r,int c,char user_chart[21][21]);{
+    
+ int i=r,j=c,b=0,k;    
+ char C;
+
+ if(msweep[r][c] == '9')   
+ {  k=0;
+   return k;
+ }
+ else
+  {
+   if(msweep[i-1][j-1] == '9')    
+    b++;  
+   if(msweep[i-1][j] == '9')    
+    b++;  
+   if(msweep[i-1][j+1] == '9')    
+    b++;  
+   if(msweep[i][j-1] == '9')    
+    b++;  
+   if(msweep[i][j+1] == '9')    
+    b++;  
+   if(msweep[i+1][j-1] == '9')    
+    b++;  
+   if(msweep[i+1][j] == '9')    
+    b++;  
+   if(msweep[i+1][j+1] == '9')    
+    b++;  
+  
+  C = (char)(((int)'0')+b); 
+
+   msweep[r][c] = C;
+   user_chart[r][c] = C;
+  
+  }
+    
+ return 1;  
+    
+}
